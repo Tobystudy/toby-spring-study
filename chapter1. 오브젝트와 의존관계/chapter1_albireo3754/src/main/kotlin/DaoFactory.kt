@@ -1,8 +1,17 @@
 package com.albireo3754
 
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+
+@Configuration
 class DaoFactory {
-    fun getUserDao(): UserDao {
-        val connectionMaker = SimpleConnectionMaker()
+    @Bean
+    fun userDao(connectionMaker: ConnectionMaker): UserDao {
         return UserDao(connectionMaker)
+    }
+
+    @Bean
+    fun connectionMaker(): ConnectionMaker {
+        return SimpleConnectionMaker()
     }
 }

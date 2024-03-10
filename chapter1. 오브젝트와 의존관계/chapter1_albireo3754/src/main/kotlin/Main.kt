@@ -1,7 +1,16 @@
 package com.albireo3754
 
-fun main() {
-    val userDao = DaoFactory().getUserDao()
+import org.springframework.beans.factory.getBean
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+
+@SpringBootApplication
+class Main
+
+fun main(args: Array<String>) {
+    val application = runApplication<Main>(*args)
+
+    val userDao = application.getBean<UserDao>()
 
     val user = User("whiteship", "백기선", "married")
     userDao.add(user)
