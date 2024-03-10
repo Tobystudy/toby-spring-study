@@ -1,10 +1,11 @@
 package com.albireo3754
 
+import java.sql.Connection
 import java.sql.DriverManager
 
-class UserDao {
+class UserDao(private val connectionMaker: SimpleConnectionMaker) {
     fun add(user: User) {
-        val connection = DriverManager.getConnection("jdbc:mysql://localhost:3308/springbook?createDatabaseIfNotExist=true", "root", null);
+        val connection = connectionMaker.getConnection();
 
         var ps = connection.prepareStatement("insert into users(id, name, password) values(?, ?, ?)")
         ps.setString(1, user.id);
@@ -18,7 +19,7 @@ class UserDao {
     }
 
     fun get(id: String): User {
-        val connection = DriverManager.getConnection("jdbc:mysql://localhost:3308/springbook?createDatabaseIfNotExist=true", "root", null);
+        val connection = connectionMaker.getConnection();
 
         var ps = connection.prepareStatement("select * from users where id = ?")
         ps.setString(1, id);
@@ -34,4 +35,6 @@ class UserDao {
 
         return user
     }
+
+
 }
