@@ -3,7 +3,7 @@ package com.albireo3754
 import java.sql.Connection
 import java.sql.DriverManager
 
-class UserDao(private val connectionMaker: SimpleConnectionMaker) {
+class UserDao(private val connectionMaker: ConnectionMaker) {
     fun add(user: User) {
         val connection = connectionMaker.getConnection();
 
