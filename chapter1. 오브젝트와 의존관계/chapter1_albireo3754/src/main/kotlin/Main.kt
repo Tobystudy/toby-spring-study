@@ -1,7 +1,7 @@
 package com.albireo3754
 
 fun main() {
-    val userDao = UserDao(SimpleConnectionMaker())
+    val userDao = DaoFactory().getUserDao()
 
     val user = User("whiteship", "백기선", "married")
     userDao.add(user)
