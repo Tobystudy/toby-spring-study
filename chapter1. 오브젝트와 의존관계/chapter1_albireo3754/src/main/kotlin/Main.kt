@@ -11,6 +11,14 @@ fun main(args: Array<String>) {
     val application = runApplication<Main>(*args)
 
     val userDao = application.getBean<UserDao>()
+    val userDao2 = application.getBean<UserDao>()
+
+    val factory = application.getBean<DaoFactory>()
+
+    println(DaoFactory().userDao(connectionMaker = factory.connectionMaker()))
+    println(DaoFactory().userDao(connectionMaker = factory.connectionMaker()))
+    println(DaoFactory().userDao(connectionMaker = factory.connectionMaker()) == DaoFactory().userDao(connectionMaker = factory.connectionMaker()))
+    println(userDao == userDao2)
 
     val user = User("whiteship", "백기선", "married")
     userDao.add(user)
