@@ -136,3 +136,16 @@ UserDao dao = new UserDao(connectionMaker);
     - UserDao -> Context
     - ConnectionMaker의 DB 연결 기능 -> 알고리즘
     - 구체적인 기능을 구현한 클래스들 -> 전략
+
+# 부록 : EJB와 스프링
+
+## EJB에서 스프링에 대세가 된 이유들..
+
+### 단순화된 단위 테스트
+- EJB는 단위 테스트가 어렵다. 사실상 불가능하다.
+- EJB 컨테이너 위에서만 로직 실행 가능.
+### 복잡한 코드의 감소
+- 위 토비의 스프링에서 봤듯이 모듈화를 통한 높은 응집도와 낮은 결합도
+### 모듈화 구조
+
+![현재 사용중인 EJB 구조 예시](https://github.com/Tobystudy/toby-spring-study/assets/63395751/e474a83f-489b-4d2d-ba8a-7d4c0ea6a725)
