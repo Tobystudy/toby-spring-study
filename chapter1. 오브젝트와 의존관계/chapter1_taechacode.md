@@ -76,3 +76,34 @@ UserDao에서 getConnection() 메소드를 추상 메소드로 만든다. 안의
 UserDao가 다른 목적으로 상속을 사용한다면?    
 슈퍼 클래스 내부의 변경이 생긴다면?    
 상속을 통한 상하위 클래스 관계는 밀접하다. 따라서 슈퍼 클래스의 변경은 모든 서브클래스의 수정을 야기할 수 있다.
+
+# 1.3 DAO의 확장
+## 1.3.1 클래스의 분리
+![두 개의 독립된 클래스로 분리한 결과](https://github.com/taechacode/TIL/assets/63395751/d824f929-9f0a-40c1-a805-bab4f8a99e40)
+
+## 1.3.2 인터페이스의 도입
+- 인터페이스는 자신을 구현한 클래스에 대한 구체적인 정보는 모두 감춰버린다.
+- 인터페이스를 통해 접근하게 되면 실제 구현한 클래스를 바꿔도 신경 쓸 일이 없다.
+<br/>
+
+![인터페이스를 도입한 결과](https://github.com/taechacode/TIL/assets/63395751/66efc084-fcf7-439f-9ddc-e08db0d4b0e5)
+
+- 구체적인 기능은 NConnectionMaker()와 DConnectionMaker() 아래에 구현되어있다.
+- DB 커넥션에 대한 구체적인 정보는 모두 제거했지만 아직까지 생성자 코드는 남아있다.
+
+## 1.3.3 관계설정 책임의 분리
+- UserDAO가 구체적인 정보와 완전히 분리되지 못함. 왜냐하면 UserDAO 내에 어떤 ConnectionMaker를 사용할 것인지에 대한 코드가 남아있기 때문.
+- 만약 UserDAO 안에 new NConnectionMaker()를 사용하기로 되어있다고 생각해보자.
+- UserDAO를 가져와서 쓰는 Client는 DConnectionMaker()를 사용하고 싶을 때 어떻게 해야하나? 난감하다.
+- Client에서 사용하는 시점에, 런타임에 어떤 ConnectionMaker()를 사용할 지 정하고 싶다.
+
+```
+public UserDao(ConnectionMaker connectionMaker) {
+    this.connectionMaker = connectionMaker;
+}
+```
+
+```
+ConnectionMaker connectionMaker = new DConnectionMaker();
+UserDao dao = new UserDao(connectionMaker);
+```
