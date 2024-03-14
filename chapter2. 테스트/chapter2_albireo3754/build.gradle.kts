@@ -17,6 +17,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.32")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.test {
