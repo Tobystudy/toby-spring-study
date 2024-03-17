@@ -216,6 +216,8 @@ user123 조회 성공
 - 만들어진 코드의 기능을 모두 점검할 수 있는 포괄적인 테스트(comprehensive test)를 만들면서부터는, 개발한 애플리케이션은 이후에 어떤 과감한 수정을 하고 나서도 테스트를 모두 돌려보고 나면 안심이 된다.
 <br/>
 
+
+
 ### 2.2.2 테스트의 효율적인 수행과 결과 관리
 - main() 메소드로 만든 테스트는 테스트로서 필요한 기능은 모두 갖춘 셈이다.
 - 하지만 좀 더 편리하게 테스를 수행하고 편리하게 결과를 확인하려면 main() 메소드로는 한계가 있다.
@@ -228,4 +230,94 @@ user123 조회 성공
 #### Junit 테스트 실행
 <br/>
 
+
+
 ## 2.3 개발자를 위한 테스팅 프레임워크 JUnit
+### 2.3.1 Junit 테스트 실행 방법
+### 2.3.2 테스트 결과의 일관성
+- 지금까지 테스트를 실행하면서 가장 불편했던 점은, 매번 UserDaoTest 테스트를 실행하기 전에 DB의 USER 테이블 데이터를 모두 삭제해줘야 할 때였다.
+- 만약 삭제 행위를 하지 않고 테스트를 다시 수행한다면 기존에 들어있던 데이터와 새로 넣으려는 데이터의 PK가 중복되어 에러가 발생한다.
+- 여기서 생각해볼 문제는 테스트가 외부 상태에 따라 성공하기도 하고 실패하기도 한다는 점이다.
+- 반복적으로 테스트를 수행했을 때 `코드에 변경사항이 없다면 테스트는 항상 동일한 결과`를 내야한다.
+- 가장 좋은 해결책은 addAndGet() 테스트를 마치고 나면 테스트가 등록한 사용자 정보를 삭제해서, 테스트를 수행하기 이전 상태로 만들어주는 것이다.
+<br/>
+
+### deleteAll()의 getCount() 추가
+#### deleteAll
+- 먼저 추가할 것은 deleteAll() 메소드로, USER 테이블의 모든 레코드를 삭제해주는 간단한 기능을 가지고 있다.
+
+```
+public void deleteAll() throws SQLException {
+    Connection c = dataSource.getConnection();
+    PreparedStatement ps = c.prepareStatement("DELETE FROM USERS");
+    ps.executeUpdate();
+
+    ps.close();
+    c.close();
+}
+```
+<br/>
+
+#### getCount()
+- 두번째 추가할 것은 getCount() 메소드로, USER 테이블의 레코드 개수를 돌려준다.
+
+```
+public int getCount() throws SQLException {
+    Connection c = dataSource.getConnection();
+    PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM USERS");
+    ResultSet rs = ps.executeQuery();
+    rs.next();
+    int count = rs.getInt(1);
+
+    rs.close();
+    ps.close();
+    c.close();
+
+    return count;
+}
+```
+<br/>
+
+### deleteAll()과 getCount()의 테스트
+- deleteAll()과 getCount() 메소드의 기능은 add()와 get()처럼 독립적으로 자동 실행되는 테스트를 만들기가 애매하다.
+- 굳이 테스트를 하자면 가능은 하다. USER 테이블에 수동으로 데이터를 넣고 deleteAll()을 실행한 뒤에 테이블에 남은 게 있는지 확인해야 한다.
+- 기존 addAndGet() 테스트에서 deleteAll()을 주요 테스트 기능이 실행된 후에 수행되게끔 하고, 정상적으로 수행되었다면 getCount()로 DB에서 가져온 레코드의 개수가 0이어야 한다.
+- deleteAll() 수행 후 getCount() 값 확인을 통해 deleteAll()을 테스트할 수 있지만 getCount()는 어떻게 수행할까? -> `add() 수행 직후 getCount()를 수행하여 deleteAll() 수행 직후 getCount() 값과 비교`한다.
+
+```
+@Test
+public void addAndGet() throws SQLException {
+    ...
+    dao.deleteAll();
+    assertThat(dao.getCount(), is(0));
+
+    User user = new User();
+    user.setId("taechacode");
+    user.setName("강태찬");
+    user.setPassword("springno1");
+
+    dao.add(user);
+    asssertThat(dao.getCount(), is(1));
+
+    User user2 = dao.get(user.getId());
+
+    assertThat(user2.getName(), is(user.getName()));
+    assertThat(user2.getPassword(), is(user.getPassword()));
+}
+```
+**deleteAll()과 getCount()가 추가된 addAndGet() 테스트**
+<br/>
+
+### 동일한 결과를 보장하는 테스트
+- 위 테스트는 이제 반복해서 여러 번 실행해도 계속 성공할 것이다.
+- 하지만 사실 모든 상황에서 위 테스트 코드가 동일한 결과를 보장하는 테스트 코드라고 불릴 수는 없다.
+- 왜냐하면 addAndGet() 테스트 실행 이전에 다른 이유로 USER 테이블에 데이터가 들어가있다면 deleteAll()이 실행되기 전에 add() 단계에서 테스트가 실패할 것이다.
+- 또 addAndGet() 테스트만 DB를 사용할 것이 아니라면 이전에 어떤 작업을 하다가 DB가 어떤 상태에서 addAndGet() 테스트에 임하게 될 지 알 수 없다.
+- 테스트 후에 USER 테이블을 지워주는 것도 좋지만, 그보다는 테스트하기 전에 테스트 실행에 문제가 되지 않는 상태를 만들어주는 편이 더 나을 것이다.
+<br/>
+
+### 2.3.3 포괄적인 테스트
+
+## 2.4 스프링 테스트 적용
+
+## 2.5 학습 테스트로 배우는 스프링
