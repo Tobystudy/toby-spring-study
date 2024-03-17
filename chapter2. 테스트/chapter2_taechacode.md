@@ -306,7 +306,7 @@ public void addAndGet() throws SQLException {
 }
 ```
 **deleteAll()과 getCount()가 추가된 addAndGet() 테스트**
-<br/>
+<br/><br/>
 
 ### 동일한 결과를 보장하는 테스트
 - 위 테스트는 이제 반복해서 여러 번 실행해도 계속 성공할 것이다.
@@ -317,6 +317,67 @@ public void addAndGet() throws SQLException {
 <br/>
 
 ### 2.3.3 포괄적인 테스트
+- 앞에서 getCount() 메소드를 테스트에 적용하긴 했지만 기존의 테스트에서 확인할 수 있었던 것은 deleteAll()을 실행했을 때 테이블이 비어 있는 경우(0)와 add()를 한 번 호출한 뒤의 결과(1)뿐이다.
+- 두 개 이상의 레코드를 add() 했을 때는 getCount()의 실행 결과가 어떻게 될까?
+<br/>
+
+### getCount() 테스트
+- 이번에는 여러 개의 User를 등록해가면서 getCount()의 결과를 매번 확인해보겠다.
+- JUnit은 하나의 클래스 안에 여러 개의 테스트 메소드가 들어가는 것을 허용한다. @Test가 붙어 있고 public 접근자가 있으며 리턴 값이 void형이고 파라미터가 없다는 조건을 지키기만 하면 된다.
+- 테스트 시나리오는 이렇다.
+    - 먼저 USER 테이블의 데이터를 모두 지우고 getCount()로 레코드 개수가 0임을 확인한다.
+    - 그리고 3개의 사용자 정보를 하나씩 추가하면서 매번 getCount()의 결과가 하나씩 증가하는지 확인하는 것이다.
+<br/>
+
+```
+public User(String id, String name, String password) {
+    this.id = id;
+    this.name = name;
+    this.password = password;
+}
+
+public User() {
+}
+```
+**파라미터가 있는 User 클래스 생성자**
+<br/>
+
+```
+UserDao dao = context.getBean("userDao", UserDao.class);
+User user = new User("taechacode", "강태찬", "springno1");
+```
+**간편해진 UserDaoTest의 User 인스턴스 생성**
+<br/>
+
+```
+@Test
+public void count() throws SQLException {
+    ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+
+    UserDao dao = context.getBean("userDao", UserDao.class");
+    User user1 = new User("taechacode", "강태찬", "springno1");
+    User user2 = new User("tlswltjq", "신지섭", "springno2");
+    User user3 = new User("albireo3754", "윤상진", "springno3");
+
+    dao.deleteAll();
+    assertThat(dao.getCount(), is(0));
+
+    dao.add(user1);
+    assertThat(dao.getCount(), is(1));
+
+    dao.add(user2);
+    assertThat(dao.getCount(), is(2));
+
+    dao.add(user3);
+    assertThat(dao.getCount(), is(3));
+}
+```
+**getCount() 테스트**
+<br/>
+
+- 여기서 주의해야 할 점은 addAndGet() 테스트와 count() 테스트가 어떤 순서로 실행될지는 알 수 없다는 것이다.
+- JUnit은 특정한 테스트 메소드의 실행 순서를 보장해주지 않는다.
+- `테스트의 결과가 테스트 실행 순서에 영향을 받는다면 그 테스트는 잘못 만든 것이다.`
 
 ## 2.4 스프링 테스트 적용
 
