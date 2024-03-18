@@ -12,6 +12,7 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.sql.SQLException
 import kotlin.test.Test
 
 @SpringBootTest(classes = [Main::class])
@@ -47,6 +48,16 @@ class UserDaoTest(var userDao: UserDao)
 
         userDao.add(user3)
         assertEquals(userDao.getCount(), 3)
+    }
+
+    @Test
+    fun getUserFailure() {
+        userDao.deleteAll()
+        assertThrows(SQLException::class.java) {
+            // MARK: - 주석을 첬을때 테스트가 실패하는지 확인해야한다.
+            userDao.get("unknown_id")
+        }
+
     }
 
 //    companion object {
