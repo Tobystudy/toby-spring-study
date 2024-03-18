@@ -512,3 +512,19 @@ public void get() throws SQLException {
 ## 2.4 스프링 테스트 적용
 
 ## 2.5 학습 테스트로 배우는 스프링
+
+## 부록. 차세대 통합 테스트를 진행하면서
+- 금융권 차세대는 단위 서버라 하더라도 수많은 거래 기능이 들어가고, 각 거래가 선후행 작업이 있거나 관계가 얽혀있는 경우가 많기 때문에 테스트 하기가 까다롭다.
+- 그나마 화면 조작 테스트는 그저 CRUD를 가시성이 좀 더 좋게 표현한 CRUD에 불과하기 때문에 비 IT 담당자여도 테스트가 가능하다. (금융 창구 프로그램을 super excel 프로그램이라고 불리우는 이유..)
+<br/>
+
+- 하지만 Batch 프로그램은 작업(Job)을 수행시키는 주체도 IT 담당자이고, Batch로 인해 영향을 받은 데이터에 접근이 가능한 담당자도 주로 IT 담당자이다.
+- 사용자가 직접 INSERT할 데이터를 수기로 넣고, 혹은 그저 넣어진 데이터를 SELECT하는 화면과는 달리, Batch 프로그램은 parameter의 상태가 복잡하고 경우의 수가 매우 많다.
+- 또한 주로 단건 처리가 이루어지는 화면과는 달리 대량 데이터 처리가 주목적이기 때문에 별도의 스트레스 테스트가 필요하다.
+    - 정석적인 방법은 아니지만, 너무 많은 데이터의 I/O가 이루어진다고 판단될 경우 화면에서는 조회범위나 INSERT 데이터량을 강제시킬 수 있다.
+    - 하지만 Batch로 작업하는 것은 거래 중요도가 높고 데이터의 양과 무관하게 반드시 처리해야 할 데이터인 경우가 많기 때문에 어떻게든 소화해야만 한다.
+<br/>
+
+- [Spring Batch Test Reference](https://docs.spring.io/spring-batch/reference/#endToEndTesting)
+- [Batch Test Code 작성 및 이슈 해결](https://clack2933.tistory.com/55)
+- [Spring Batch 테스트하기](https://multifrontgarden.tistory.com/291)
