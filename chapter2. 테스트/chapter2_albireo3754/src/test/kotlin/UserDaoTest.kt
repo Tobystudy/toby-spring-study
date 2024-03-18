@@ -34,6 +34,8 @@ class UserDaoTest(var userDao: UserDao)
 
     @Test
     fun addAndGet() {
+        println(userDao)
+        println(this)
         val user = User("whiteship", "백기선", "married")
         userDao.add(user)
 
@@ -46,7 +48,8 @@ class UserDaoTest(var userDao: UserDao)
 
     @Test
     fun test() {
-
+        print(userDao)
+        println(this)
 
         assertEquals(userDao.getCount(), 0)
 
@@ -62,6 +65,9 @@ class UserDaoTest(var userDao: UserDao)
 
     @Test
     fun getUserFailure() {
+        print(userDao)
+        println(this)
+
         assertThrows(SQLException::class.java) {
             // MARK: - 주석을 첬을때 테스트가 실패하는지 확인해야한다.
             userDao.get("unknown_id")
@@ -77,3 +83,31 @@ class UserDaoTest(var userDao: UserDao)
 //        }
 //    }
 }
+
+@SpringBootTest(classes = [Main::class])
+@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+class UserDaoTest2(var userDao: UserDao)
+{
+    private lateinit var user1: User
+    private lateinit var user2: User
+    private lateinit var user3: User
+    @Test
+    fun getUserFailure() {
+        print(userDao)
+        println(this)
+
+        assertThrows(SQLException::class.java) {
+            // MARK: - 주석을 첬을때 테스트가 실패하는지 확인해야한다.
+            userDao.get("unknown_id")
+        }
+    }
+
+}
+
+//    companion object {
+//        @JvmStatic
+//        @AfterAll
+//        fun tearDown(): Unit {
+//            userDao.deleteAll()
+//        }
+//    }
