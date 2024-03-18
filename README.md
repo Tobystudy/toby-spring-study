@@ -1,4 +1,6 @@
 # 토비의 스프링 스터디
+![image](https://github.com/Tobystudy/toby-spring-study/assets/41179427/34957f6f-d10e-47ee-8955-d95a121e9545)
+
 
 # 목표
 - 토비의 스프링 vol.1, vol.2(6월 말까지 컷)
