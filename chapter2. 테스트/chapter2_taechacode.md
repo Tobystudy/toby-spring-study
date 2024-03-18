@@ -378,6 +378,111 @@ public void count() throws SQLException {
 - 여기서 주의해야 할 점은 addAndGet() 테스트와 count() 테스트가 어떤 순서로 실행될지는 알 수 없다는 것이다.
 - JUnit은 특정한 테스트 메소드의 실행 순서를 보장해주지 않는다.
 - `테스트의 결과가 테스트 실행 순서에 영향을 받는다면 그 테스트는 잘못 만든 것이다.`
+<br/>
+
+
+
+### addAndGet() 테스트 보완
+- add() 후에 레코드 개수를 확인하고, get()으로 읽어와서 값도 비교해보아서 add()의 기능은 충분히 검증하였다.
+- 하지만 id를 조건으로 해서 사용자를 검색하는 기능을 가진 get()에 대한 테스트는 검증이 부족하다.
+- 2개의 User를 add()하고, 각 User의 id를 파라미터로 전달해서 get() 실행한다. 이렇게 해서 가져온 User 객체와 기존에 add() 했었던 객체를 비교하면 주어진 id에 해당하는 정확한 User 정보를 가져오는지 확인할 수 있다.
+<br/>
+
+```
+@Test
+public void addAndGet() throws SQLException {
+
+    ....
+
+    UserDao dao = context.getBean("userDao", UserDao.class");
+    User user1 = new User("taechacode", "강태찬", "springno1");
+    User user2 = new User("tlswltjq", "신지섭", "springno2");
+
+    dao.deleteAll();
+    assertThat(dao.getCount(), is(0));
+
+    dao.add(user1);
+    dao.add(user2);
+    assertThat(dao.getCount(), is(2));
+
+    User userget1 = dao.get(user1.getId());
+    assertThat(userget1.getName(), is(user1.getName());
+    assertThat(userget1.getPassword(), is(user1.getPassword());
+
+    User userget2 = dao.get(user2.getId());
+    assertThat(userget2.getName(), is(user2.getName());
+    assertThat(userget2.getPassword(), is(user2.getPassword());
+}
+```
+**get() 테스트 기능을 보완한 addAndGet() 테스트**
+<br/><br/>
+
+
+### get() 예외조건에 대한 테스트
+- get() 메소드에 전달된 id 값에 해당하는 사용자 정보가 없다면 어떻게 될까?
+- 보통 2가지 방법이 있다.
+    - 하나는 null과 같은 특별한 값을 return하는 것이다.
+    - 다른 하나는 id에 해당하는 정보를 찾을 수 없다고 예외를 던지는 것이다.
+- 아래의 테스트 코드는 id에 해당하는 정보를 찾을 수 없을 때 예외가 발생하는 경우 성공하는 테스트 코드이다.
+- get() 메소드에서 쿼리 결과의 첫 번째 row를 가져오게 하는 rs.next()를 실행할 때 가져올 row가 없다는 SQLException이 발생할 것이다.
+<br/>
+
+```
+@Test(expected=EmptyResultDataAccessException.class)
+public void getUserFailure() throws SQLException {
+    Application context = new GenericXmlApplicationContext("applicationContext.xml");
+
+    UserDao dao = context.getBean("userDao", UserDao.class);
+    dao.deleteAll();
+    assertThat(dao.getCount(), is(0));
+
+    dao.get("unknown_id");
+}
+```
+**get() 메소드의 예외상황에 대한 테스트**
+<br/><br/>
+
+
+### 테스트를 성공시키기 위한 코드의 수정
+- 위의 예외처리 테스트뿐만 아니라 다른 테스트들도 성공하도록 get() 메소드를 수정해보자.
+- 아래의 get() 메소드를 수정하다가 기존 코드를 잘못 건드렸을 경우 정상적인 조건에서 get()을 실행시켰을 때 문제가 발생할 수 있다.
+- 이때는 addAndGet() 테스트가 실패할 것이므로, 이를 확인하고 다시 get() 메소드의 오류를 잡아주면 된다.
+- 최종적으로 모든 테스트가 성공하면, 새로 추가한 기능도 정상적으로 동작하고 기존의 기능에도 영향을 주지 않았다면 확신을 얻을 수 있다.
+<br/>
+
+```
+public void get() throws SQLException {
+    ...
+
+    ResultSet rs = ps.executeQuery();
+
+    User user = null;
+    if(rs.next()) {
+        user = new User();
+        user.setId(rs.getString("id"));
+        user.setName(rs.getString("name"));
+        user.setPassword(rs.getString("password"));
+    }
+
+    rs.close();
+    ps.close();
+    c.close();
+
+    if(user == null) throw new EmptyResultDataAccessException(1);
+
+    return user;
+}
+```
+**데이터를 찾지 못하면 예외를 발생시키도록 수정한 get() 메소드**
+<br/><br/>
+
+
+### 포괄적인 테스트
+- 개발자가 테스트를 직접 만들 때 자주 하는 실수는 성공하는 테스트만 골라서 만드는 것이다.
+- 개발자도 조금만 신경을 쓰면 자신이 만든 코드에서 발생할 수 있는 다양한 상황과 입력 값을 고려하는 포괄적인 테스트를 만들 수 있다.
+- 스프링의 창시자인 로드 존슨은 `"항상 네거티브 테스트를 먼저 만들라"`는 조언을 했다.
+- 개발자는 빨리 테스트를 만들어 성공하고 다음 단계로 넘어가고 싶어하기 때문에, 성공할만한 테스트를 먼저 작성하게 되기 쉽다. 그래서 `부정적인 케이스를 먼저 만드는 습관을 들이는 게 좋다.`
+<br/>
 
 ## 2.4 스프링 테스트 적용
 
