@@ -1,7 +1,4 @@
-import com.albireo3754.DaoFactory
-import com.albireo3754.Main
-import com.albireo3754.User
-import com.albireo3754.UserDao
+import com.albireo3754.*
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
@@ -101,7 +98,36 @@ class UserDaoTest2(var userDao: UserDao)
             userDao.get("unknown_id")
         }
     }
+}
 
+class UserDaoTest3 {
+    private lateinit var userDao: UserDao
+    private lateinit var user1: User
+    private lateinit var user2: User
+    private lateinit var user3: User
+
+    @BeforeEach
+    fun setUp() {
+        userDao = UserDao(connectionMaker = SimpleConnectionMaker())
+        user1 = User("whiteship", "백기선", "married")
+        user2 = User("gyumee", "백명선", "single")
+        user3 = User("toby", "김영한", "single")
+        userDao.deleteAll()
+    }
+
+    @Test
+    fun addAndGet() {
+        println(userDao)
+        println(this)
+        val user = User("whiteship", "백기선", "married")
+        userDao.add(user)
+
+        val user2 = userDao.get(user.id)
+
+        assertEquals(user.id, user2.id)
+        assertEquals(user.name, user2.name)
+        assertEquals(user.password, user2.password)
+    }
 }
 
 //    companion object {
