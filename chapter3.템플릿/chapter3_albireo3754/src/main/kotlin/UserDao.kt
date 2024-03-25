@@ -42,21 +42,7 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
         val connection: Connection = connectionMaker.getConnection();
         var ps: PreparedStatement? = null
 
-        try {
-            val strategy = DeleteAllStatement()
-            ps = strategy.makePreparedStatement(connection)
-            ps.executeUpdate()
-        } catch (e: Exception) {
-            throw e
-        } finally {
-            ps?.let {
-                try { it.close() } catch (_: Exception) { }
-            }
-
-            connection.let {
-                try { it.close() } catch (_: Exception) { }
-            }
-        }
+        jdbcContextWithStatementStrategy(DeleteAllStatement())
     }
 
     fun getCount(): Int {
@@ -82,6 +68,33 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
                 }
             }
 
+            ps?.let {
+                try {
+                    it.close()
+                } catch (_: Exception) {
+                }
+            }
+
+            connection?.let {
+                try {
+                    it.close()
+                } catch (_: Exception) {
+                }
+            }
+        }
+    }
+
+    private fun jdbcContextWithStatementStrategy(stmt: StatementStrategy) {
+        var connection: Connection? = null
+        var ps: PreparedStatement? = null
+
+        try {
+            connection = connectionMaker.getConnection()
+            ps = stmt.makePreparedStatement(connection)
+            ps.executeUpdate()
+        } catch (e: Exception) {
+            throw e
+        } finally {
             ps?.let {
                 try {
                     it.close()
