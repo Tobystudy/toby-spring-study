@@ -31,8 +31,6 @@ class UserDaoTest(var userDao: UserDao)
 
     @Test
     fun addAndGet() {
-        println(userDao)
-        println(this)
         val user = User("whiteship", "백기선", "married")
         userDao.add(user)
 
