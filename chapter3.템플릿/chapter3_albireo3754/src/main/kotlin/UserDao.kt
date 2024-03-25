@@ -43,8 +43,8 @@ class UserDao(private val connectionMaker: ConnectionMaker) {
         var ps: PreparedStatement? = null
 
         try {
-            ps = connection.prepareStatement("delete from users")
-            ps?.executeUpdate()
+            ps = makeStatement(connection)
+            ps.executeUpdate()
         } catch (e: Exception) {
             throw e
         } finally {
@@ -97,4 +97,8 @@ class UserDao(private val connectionMaker: ConnectionMaker) {
         }
     }
 
+    private fun makeStatement(connection: Connection): PreparedStatement {
+        var ps = connection.prepareStatement("delete from users")
+        return ps
+    }
 }
