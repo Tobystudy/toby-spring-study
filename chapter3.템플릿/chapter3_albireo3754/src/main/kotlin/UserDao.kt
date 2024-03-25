@@ -2,7 +2,6 @@ package com.albireo3754
 
 import org.springframework.stereotype.Component
 import java.sql.Connection
-import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import javax.sql.DataSource
@@ -38,7 +37,7 @@ class UserDao(private var dataSource: DataSource, private var jdbcContext: JdbcC
     }
 
     fun deleteAll() {
-        jdbcContext.workWithStatementStrategy(DeleteAllStatement())
+        jdbcContext.executeSql("delete from users")
     }
 
     fun getCount(): Int {

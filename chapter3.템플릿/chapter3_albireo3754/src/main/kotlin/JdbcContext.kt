@@ -31,4 +31,10 @@ class JdbcContext(private val dataSource: DataSource) {
             }
         }
     }
+
+    fun executeSql(sql: String) {
+        return workWithStatementStrategy(StatementStrategy {
+                connection: Connection -> connection.prepareStatement(sql)
+        })
+    }
 }
