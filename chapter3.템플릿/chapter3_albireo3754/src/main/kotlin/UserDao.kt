@@ -5,7 +5,7 @@ import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
-class UserDao(private val connectionMaker: ConnectionMaker) {
+open class UserDao(private val connectionMaker: ConnectionMaker) {
     fun add(user: User) {
         val connection = connectionMaker.getConnection();
 
@@ -43,7 +43,8 @@ class UserDao(private val connectionMaker: ConnectionMaker) {
         var ps: PreparedStatement? = null
 
         try {
-            ps = makeStatement(connection)
+            val strategy = DeleteAllStatement()
+            ps = strategy.makePreparedStatement(connection)
             ps.executeUpdate()
         } catch (e: Exception) {
             throw e
@@ -95,10 +96,5 @@ class UserDao(private val connectionMaker: ConnectionMaker) {
                 }
             }
         }
-    }
-
-    private fun makeStatement(connection: Connection): PreparedStatement {
-        var ps = connection.prepareStatement("delete from users")
-        return ps
     }
 }
