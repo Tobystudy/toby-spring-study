@@ -3,6 +3,7 @@ package com.albireo3754
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.PreparedStatement
+import java.sql.ResultSet
 
 class UserDao(private val connectionMaker: ConnectionMaker) {
     fun add(user: User) {
@@ -58,18 +59,42 @@ class UserDao(private val connectionMaker: ConnectionMaker) {
     }
 
     fun getCount(): Int {
-        val connection = connectionMaker.getConnection()
+        var connection: Connection? = null;
+        var ps: PreparedStatement? = null;
+        var rs: ResultSet? = null;
 
-        val ps = connection.prepareStatement("select count(*) from users")
-        val rs = ps.executeQuery()
-        rs.next()
-        val count = rs.getInt(1);
+        try {
+            connection = connectionMaker.getConnection()
+            ps = connection?.prepareStatement("select count(*) from users")
+            rs = ps?.executeQuery()
+            rs?.next()
+            val count = rs!!.getInt(1);
 
-        rs.close()
-        ps.close()
-        connection.close()
+            return count
+        } catch (e: Exception) {
+            throw e
+        } finally {
+            rs?.let {
+                try {
+                    it.close()
+                } catch (_: Exception) {
+                }
+            }
 
-        return count
+            ps?.let {
+                try {
+                    it.close()
+                } catch (_: Exception) {
+                }
+            }
+
+            connection?.let {
+                try {
+                    it.close()
+                } catch (_: Exception) {
+                }
+            }
+        }
     }
 
 }
