@@ -16,9 +16,11 @@ class UserDao(private var jdbcTemplate: JdbcTemplate) {
     }
 
     fun get(id: String): User {
-        return jdbcTemplate.queryForObject("select * from users where id = ?", { rs: ResultSet, _: Int ->
-            User(rs.getString("id"), rs.getString("name"), rs.getString("password"))
-        }, id)!!
+        return jdbcTemplate.queryForObject("select * from users where id = ?", userMapper(), id)!!
+    }
+
+    private fun userMapper() = { rs: ResultSet, _: Int ->
+        User(rs.getString("id"), rs.getString("name"), rs.getString("password"))
     }
 
     fun deleteAll() {
