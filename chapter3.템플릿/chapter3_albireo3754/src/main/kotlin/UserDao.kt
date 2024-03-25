@@ -7,17 +7,7 @@ import java.sql.ResultSet
 
 open class UserDao(private val connectionMaker: ConnectionMaker) {
     fun add(user: User) {
-        val connection = connectionMaker.getConnection();
-
-        var ps = connection.prepareStatement("insert into users(id, name, password) values(?, ?, ?)")
-        ps.setString(1, user.id);
-        ps.setString(2, user.name);
-        ps.setString(3, user.password);
-
-        ps.executeUpdate()
-
-        ps.close()
-        connection.close()
+        var ps = jdbcContextWithStatementStrategy(AddStatement(user))
     }
 
     fun get(id: String): User {
@@ -39,9 +29,6 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
     }
 
     fun deleteAll() {
-        val connection: Connection = connectionMaker.getConnection();
-        var ps: PreparedStatement? = null
-
         jdbcContextWithStatementStrategy(DeleteAllStatement())
     }
 
