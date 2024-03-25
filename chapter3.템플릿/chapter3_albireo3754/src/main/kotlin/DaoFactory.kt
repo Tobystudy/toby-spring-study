@@ -6,11 +6,6 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class DaoFactory {
     @Bean
-    fun userDao(connectionMaker: ConnectionMaker): UserDao {
-        return UserDao(connectionMaker)
-    }
-
-    @Bean
     fun connectionMaker(): ConnectionMaker {
         return SimpleConnectionMaker()
     }

@@ -1,13 +1,16 @@
 package com.albireo3754
 
+import org.springframework.stereotype.Component
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.ResultSet
+import javax.sql.DataSource
 
-open class UserDao(private val connectionMaker: ConnectionMaker) {
+@Component
+class UserDao(private var dataSource: DataSource, private var jdbcContext: JdbcContext) {
     fun add(user: User) {
-        jdbcContextWithStatementStrategy { connection ->
+        jdbcContext.workWithStatementStrategy { connection ->
             val ps = connection.prepareStatement("insert into users(id, name, password) values(?, ?, ?)")
             ps.setString(1, user.id);
             ps.setString(2, user.name);
@@ -17,7 +20,7 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
     }
 
     fun get(id: String): User {
-        val connection = connectionMaker.getConnection();
+        val connection = dataSource.getConnection();
 
         var ps = connection.prepareStatement("select * from users where id = ?")
         ps.setString(1, id);
@@ -35,7 +38,7 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
     }
 
     fun deleteAll() {
-        jdbcContextWithStatementStrategy(DeleteAllStatement())
+        jdbcContext.workWithStatementStrategy(DeleteAllStatement())
     }
 
     fun getCount(): Int {
@@ -44,7 +47,7 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
         var rs: ResultSet? = null;
 
         try {
-            connection = connectionMaker.getConnection()
+            connection = dataSource.getConnection()
             ps = connection?.prepareStatement("select count(*) from users")
             rs = ps?.executeQuery()
             rs?.next()
@@ -61,33 +64,6 @@ open class UserDao(private val connectionMaker: ConnectionMaker) {
                 }
             }
 
-            ps?.let {
-                try {
-                    it.close()
-                } catch (_: Exception) {
-                }
-            }
-
-            connection?.let {
-                try {
-                    it.close()
-                } catch (_: Exception) {
-                }
-            }
-        }
-    }
-
-    private fun jdbcContextWithStatementStrategy(stmt: StatementStrategy) {
-        var connection: Connection? = null
-        var ps: PreparedStatement? = null
-
-        try {
-            connection = connectionMaker.getConnection()
-            ps = stmt.makePreparedStatement(connection)
-            ps.executeUpdate()
-        } catch (e: Exception) {
-            throw e
-        } finally {
             ps?.let {
                 try {
                     it.close()
