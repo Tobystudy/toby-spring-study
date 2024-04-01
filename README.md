@@ -7,7 +7,10 @@
 
 # 진행 상황
 - [2024.03.05] session 1. 킥오프
-- 
+- [2024.03.12] session 2. 오브젝트와 의존관계 - 발표자 : taechacode
+- [2024.03.19] session 3. 테스트 - 발표자 : tachacode
+- [2024.03.26] session 4. 템플릿 - 발표자 : albireo3754 [비고: taechacode 출장으로 불참]
+- [2024.04.02] session 5. 예외
 
 
 # 자료 컨벤션
