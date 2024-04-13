@@ -5,6 +5,14 @@ enum class Level {
     SILVER,
     GOLD;
 
+    fun nextLevel(): Level? {
+        return when (this) {
+            BASIC -> SILVER
+            SILVER -> GOLD
+            GOLD -> null
+        }
+    }
+
     companion object {
         fun valueOf(value: Int): Level {
             return when (value) {
