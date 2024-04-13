@@ -29,6 +29,6 @@ class UserDao(private var jdbcTemplate: JdbcTemplate) {
     }
 
     fun update(user1: User) {
-        jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, recommend = ?", user1.name, user1.password, user1.level.ordinal, user1.login, user1.recommend)
+        jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, recommend = ? where id = ?", user1.name, user1.password, user1.level.ordinal, user1.login, user1.recommend, user1.id)
     }
 }

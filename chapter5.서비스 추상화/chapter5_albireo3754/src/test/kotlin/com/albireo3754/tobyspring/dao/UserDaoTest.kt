@@ -39,10 +39,13 @@ class UserDaoTest (var userDao: UserDao)
     fun update() {
         userDao.add(user1)
         user1.name = "오민석"
+        userDao.add(user2)
         userDao.update(user1)
 
         val user1update = userDao.get(user1.id)
+        val user2NotUpdate = userDao.get(user2.id)
         checkSameUser(user1, user1update)
+        checkSameUser(user2, user2NotUpdate)
     }
 
     @Test
