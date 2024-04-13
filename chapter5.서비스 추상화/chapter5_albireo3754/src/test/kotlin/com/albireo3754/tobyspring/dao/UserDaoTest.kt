@@ -36,6 +36,16 @@ class UserDaoTest (var userDao: UserDao)
     }
 
     @Test
+    fun update() {
+        userDao.add(user1)
+        user1.name = "오민석"
+        userDao.update(user1)
+
+        val user1update = userDao.get(user1.id)
+        checkSameUser(user1, user1update)
+    }
+
+    @Test
     fun kotlinEum() {
         assertEquals(Level.valueOf(0), Level.BASIC)
     }

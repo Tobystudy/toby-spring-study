@@ -27,4 +27,8 @@ class UserDao(private var jdbcTemplate: JdbcTemplate) {
     fun getCount(): Int {
         return jdbcTemplate.queryForObject("select count(*) from users", Int::class.java)!!
     }
+
+    fun update(user1: User) {
+        jdbcTemplate.update("update users set name = ?, password = ?, level = ?, login = ?, recommend = ?", user1.name, user1.password, user1.level.ordinal, user1.login, user1.recommend)
+    }
 }
