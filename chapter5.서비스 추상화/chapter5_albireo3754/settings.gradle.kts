@@ -1,5 +1,1 @@
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
-}
-rootProject.name = "chapter1_albireo3754"
-
+rootProject.name = "toby-spring"

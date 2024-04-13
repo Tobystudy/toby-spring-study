@@ -1,12 +1,11 @@
-package com.albireo3754
+package com.albireo3754.tobyspring
 
-import org.springframework.beans.factory.getBean
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class Main
+class TobySpringApplication
 
 fun main(args: Array<String>) {
-    val application = runApplication<Main>(*args)
+    runApplication<TobySpringApplication>(*args)
 }

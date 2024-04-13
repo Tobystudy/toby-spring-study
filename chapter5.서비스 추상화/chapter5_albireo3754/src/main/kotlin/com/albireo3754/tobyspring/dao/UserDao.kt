@@ -1,13 +1,9 @@
-package com.albireo3754
+package com.albireo3754.tobyspring.dao
 
-import org.springframework.boot.autoconfigure.jdbc.JdbcProperties.Template
+import com.albireo3754.domain.User
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.queryForObject
 import org.springframework.stereotype.Component
-import java.sql.Connection
-import java.sql.PreparedStatement
 import java.sql.ResultSet
-import javax.sql.DataSource
 
 @Component
 class UserDao(private var jdbcTemplate: JdbcTemplate) {
