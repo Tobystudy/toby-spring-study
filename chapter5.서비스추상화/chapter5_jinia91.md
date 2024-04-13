@@ -1,3 +1,7 @@
+# TDD로 구현 따라가기 샘플 예제
+
+https://github.com/jinia91/tobyspring-sample-project/pull/9
+
 # 스프링의 트랜잭션 추상화
 
 트랜잭션의 이슈는 크게 2가지
