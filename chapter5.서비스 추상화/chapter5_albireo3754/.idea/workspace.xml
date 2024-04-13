@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f1f503-50bc-4c2f-a8fd-801f8564298d" name="Changes" comment="5장 리부트">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/service/UserService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/UserServiceTest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/dao/UserDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/dao/UserDao.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/dao/UserDaoTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/dao/UserDaoTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,10 +20,21 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -56,9 +68,13 @@
     "Gradle.UserDaoTest.executor": "Run",
     "Gradle.UserDaoTest.kotlinEum.executor": "Run",
     "Gradle.UserDaoTest.test.executor": "Run",
+    "Gradle.UserServiceTest.executor": "Run",
+    "Gradle.UserServiceTest.test.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "feature/spring-5",
     "kotlin-language-version-configured": "true",
@@ -85,11 +101,17 @@
       <recent name="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/sql" />
       <recent name="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.albireo3754.tobyspring.dao" />
     </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.albireo3754.tobyspring.service" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserDaoTest">
+  <component name="RunManager" selected="Gradle.UserServiceTest">
     <configuration name="UserDaoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -162,7 +184,7 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="UserDaoTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="UserServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -175,7 +197,31 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.albireo3754.tobyspring.dao.UserDaoTest.test&quot;" />
+            <option value="&quot;com.albireo3754.tobyspring.service.UserServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="UserServiceTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.albireo3754.tobyspring.service.UserServiceTest.test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -208,10 +254,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.UserServiceTest" />
+        <item itemvalue="Gradle.UserServiceTest.test" />
         <item itemvalue="Gradle.UserDaoTest" />
         <item itemvalue="Gradle.UserDaoTest.kotlinEum" />
         <item itemvalue="Gradle.UserDaoTest.addAndGet" />
-        <item itemvalue="Gradle.UserDaoTest.test" />
       </list>
     </recent_temporary>
   </component>
@@ -230,7 +277,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712995892848</updated>
-      <workItem from="1712995893831" duration="3113000" />
+      <workItem from="1712995893831" duration="3726000" />
     </task>
     <task id="LOCAL-00001" summary="5장 리부트">
       <option name="closed" value="true" />
