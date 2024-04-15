@@ -3,17 +3,30 @@ package com.albireo3754.tobyspring.service
 import com.albireo3754.domain.Level
 import com.albireo3754.domain.User
 import com.albireo3754.tobyspring.dao.UserDao
+import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.stereotype.Component
+import org.springframework.transaction.support.DefaultTransactionDefinition
 
 @Component
-class UserService(val userDao: UserDao) {
+class UserService(
+    val userDao: UserDao,
+    private val transactionManager: DataSourceTransactionManager
+) {
 
     fun upgradeLevels() {
+        val status = transactionManager.getTransaction(DefaultTransactionDefinition())
+
         val users = userDao.getAll()
-        users.forEach { user ->
-            if (canUpgradeLevel(user)) {
-                upgradeLevel(user)
+        try {
+            users.forEach { user ->
+                if (canUpgradeLevel(user)) {
+                    upgradeLevel(user)
+                }
             }
+            transactionManager.commit(status)
+        } catch (e: Exception) {
+            transactionManager.rollback(status)
+            throw e
         }
     }
 
