@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="61f1f503-50bc-4c2f-a8fd-801f8564298d" name="Changes" comment="5장 리부트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/DummyMailSenderService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/DummyMailSenderService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/UserServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/UserServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -284,7 +283,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712995892848</updated>
       <workItem from="1712995893831" duration="10222000" />
-      <workItem from="1713015784003" duration="6681000" />
+      <workItem from="1713015784003" duration="6954000" />
     </task>
     <task id="LOCAL-00001" summary="5장 리부트">
       <option name="closed" value="true" />

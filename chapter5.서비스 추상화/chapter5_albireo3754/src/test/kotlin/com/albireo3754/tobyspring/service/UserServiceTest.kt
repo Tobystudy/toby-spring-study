@@ -6,7 +6,10 @@ import com.albireo3754.tobyspring.dao.UserDao
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.ArgumentMatchers.any
+import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
@@ -16,14 +19,16 @@ import org.springframework.test.context.TestConstructor
 
 @SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class UserServiceTest(var userDao: UserDao, var mailSenderService: DummyMailSenderService) {
-    lateinit var userService: UserService
+class UserServiceTest(var userDao: UserDao) {
+    @MockBean lateinit var mailSenderServiceImpl: MailSenderServiceImpl
+    @Autowired lateinit var userService: UserService
     private var users = mutableListOf<User>()
-
 
     @BeforeEach
     fun setUp() {
-        userService = UserService(userDao, mailSenderService)
+        given(mailSenderServiceImpl.send(any())).will({ invocation ->
+            null
+        })
         users.add(User("whiteship", "백기선", "married", Level.BASIC, 1, 0))
         users.add(User("gyumee", "강명선", "single", Level.SILVER, 55, 10))
         users.add(User("toby", "김영한", "single", Level.GOLD, 100, 40))
