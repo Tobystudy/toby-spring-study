@@ -10,10 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.test.context.TestConstructor
 
-@SpringBootTest
+@SpringBootTest(classes = [DummyMailSenderService::class])
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class UserServiceTest(var userService: UserService, var userDao: UserDao) {
     private var users = mutableListOf<User>()
+
+
     @BeforeEach
     fun setUp() {
         users.add(User("whiteship", "백기선", "married", Level.BASIC, 1, 0))
@@ -28,7 +30,8 @@ class UserServiceTest(var userService: UserService, var userDao: UserDao) {
 
     @Test
     fun upgradeLevels() {
-        for (user in users) userDao.add(user)
+        users[0].login = 50
+        userDao.add(users[0])
 
         userService.upgradeLevels()
 

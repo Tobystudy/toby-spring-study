@@ -3,21 +3,16 @@ package com.albireo3754.tobyspring.service
 import com.albireo3754.domain.Level
 import com.albireo3754.domain.User
 import com.albireo3754.tobyspring.dao.UserDao
-import jakarta.mail.Session
-import jakarta.mail.internet.InternetAddress
-import jakarta.mail.internet.MimeMessage
-import org.springframework.jdbc.datasource.DataSourceTransactionManager
-import org.springframework.mail.MailSender
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.mail.SimpleMailMessage
-import org.springframework.mail.javamail.MimeMailMessage
 import org.springframework.stereotype.Component
-import org.springframework.transaction.support.DefaultTransactionDefinition
 import java.util.Properties
 
 @Component
 class UserService(
     val userDao: UserDao,
-    val mailSender: MailSender
+    @Qualifier("mailSenderServiceImpl")
+    val mailSenderService: MailSenderService
 ) {
 
     fun upgradeLevels() {
@@ -50,6 +45,6 @@ class UserService(
         val mail = SimpleMailMessage()
         mail.setFrom("user")
         mail.setSubject("Upgrade 안내")
-        mailSender.send(mail)
+        mailSenderService.send(mail)
     }
 }
