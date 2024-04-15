@@ -3,11 +3,11 @@ package com.albireo3754.tobyspring.service
 import com.albireo3754.domain.Level
 import com.albireo3754.domain.User
 import com.albireo3754.tobyspring.dao.UserDao
-import com.albireo3754.tobyspring.service.UserServiceTest.TestUserService.userDao
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.test.context.TestConstructor
 
 @SpringBootTest
