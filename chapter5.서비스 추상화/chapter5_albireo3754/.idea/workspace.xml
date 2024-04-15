@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f1f503-50bc-4c2f-a8fd-801f8564298d" name="Changes" comment="5장 리부트">
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1687e23a-42c7-48ca-91d8-a05a8f09aa5f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1687e23a-42c7-48ca-91d8-a05a8f09aa5f.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e88a5317-8851-40f3-88e4-66cfa5616eb0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e88a5317-8851-40f3-88e4-66cfa5616eb0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/service/UserService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/albireo3754/tobyspring/service/UserService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/UserServiceTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/service/UserServiceTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +282,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712995892848</updated>
       <workItem from="1712995893831" duration="10222000" />
-      <workItem from="1713015784003" duration="1396000" />
+      <workItem from="1713015784003" duration="2065000" />
     </task>
     <task id="LOCAL-00001" summary="5장 리부트">
       <option name="closed" value="true" />
