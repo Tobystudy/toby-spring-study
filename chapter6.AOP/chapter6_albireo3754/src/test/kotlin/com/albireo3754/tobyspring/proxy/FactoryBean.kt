@@ -10,9 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 
 @Component
 class MessageService {
+    @Transactional
     fun getMessage(): String {
         return "Hello, World!"
     }
@@ -26,6 +28,11 @@ class MessageServiceFactoryBean : FactoryBean<MessageService> {
     override fun getObjectType(): Class<*> {
         return MessageService::class.java
     }
+
+    private fun test_transactional() {
+        println("test_transactional")
+
+    }
 }
 @SpringBootTest(classes = [MessageServiceFactoryBean::class])
 class FactoryBeanTests @Autowired constructor(
@@ -34,9 +41,9 @@ class FactoryBeanTests @Autowired constructor(
     fun test() {
         println("test")
         applicationContext shouldNotBe null
-//        applicationContext.getBean(MessageService::class.java).getMessage() shouldBe "Hello, World!"
+        applicationContext.getBean(MessageService::class.java).getMessage() shouldBe "Hello, World!"
 //        applicationContext.getBean("messageService") shouldBe applicationContext.getBean(MessageService::class.java)
-        val factoryBean = applicationContext.getBean("&messageService", MessageServiceFactoryBean::class.java)
+//        val factoryBean = applicationContext.getBean("&messageService", MessageServiceFactoryBean::class.java)
 //        factoryBean?.`object` shouldBe applicationContext.getBean(MessageService::class.java)
     }
 }
