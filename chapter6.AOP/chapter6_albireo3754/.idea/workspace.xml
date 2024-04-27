@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f1f503-50bc-4c2f-a8fd-801f8564298d" name="Changes" comment="5장 리부트">
-      <change beforePath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../chapter5.서비스 추상화/chapter5_albireo3754/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/proxy/ProxyTests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +42,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Kotlin Class" />
         <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -82,12 +81,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.ProxyTests.proxyTest.executor": "Run",
     "Gradle.Tests in 'toby-spring.test'.executor": "Run",
     "Gradle.UserDaoTest.addAndGet.executor": "Run",
     "Gradle.UserDaoTest.executor": "Run",
     "Gradle.UserDaoTest.kotlinEum.executor": "Run",
     "Gradle.UserDaoTest.test.executor": "Run",
-    "Gradle.UserServiceTest.executor": "Run",
+    "Gradle.UserServiceTest.executor": "Debug",
     "Gradle.UserServiceTest.test.executor": "Run",
     "Gradle.UserServiceTest.upgradeAllOrNothing.executor": "Run",
     "Gradle.UserServiceTest.upgradeLevels.executor": "Run",
@@ -97,7 +97,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feature/spring-6",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/pray/projects/kotlin/toby-spring-study/chapter6.AOP/chapter6_albireo3754",
     "node.js.detected.package.eslint": "true",
@@ -133,7 +133,31 @@
       <recent name="com.albireo3754.tobyspring.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.UserServiceTest">
+  <component name="RunManager" selected="Gradle.ProxyTests.proxyTest">
+    <configuration name="ProxyTests.proxyTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.albireo3754.tobyspring.proxy.ProxyTests.proxyTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="Tests in 'toby-spring.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -170,30 +194,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.albireo3754.tobyspring.service.UserServiceTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="UserServiceTest.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.albireo3754.tobyspring.service.UserServiceTest.test&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -274,11 +274,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ProxyTests.proxyTest" />
         <item itemvalue="Gradle.UserServiceTest" />
         <item itemvalue="Gradle.UserServiceTest.upgradeLevels" />
         <item itemvalue="Gradle.UserServiceTest.upgradeAllOrNothing" />
         <item itemvalue="Gradle.Tests in 'toby-spring.test'" />
-        <item itemvalue="Gradle.UserServiceTest.test" />
       </list>
     </recent_temporary>
   </component>
@@ -300,7 +300,7 @@
       <workItem from="1712995893831" duration="10222000" />
       <workItem from="1713015784003" duration="7094000" />
       <workItem from="1713193320155" duration="34000" />
-      <workItem from="1713964633630" duration="1733000" />
+      <workItem from="1713964633630" duration="2814000" />
     </task>
     <task id="LOCAL-00001" summary="5장 리부트">
       <option name="closed" value="true" />
