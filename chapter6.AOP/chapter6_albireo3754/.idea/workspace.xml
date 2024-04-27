@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61f1f503-50bc-4c2f-a8fd-801f8564298d" name="Changes" comment="5장 리부트">
-      <change beforePath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/proxy/ProxyTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/proxy/ProxyTests.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/kotlin/com/albireo3754/tobyspring/proxy/FactoryBean.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +84,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.FactoryBean.test.executor": "Run",
+    "Gradle.FactoryBeanTests.executor": "Run",
+    "Gradle.FactoryBeanTests.test.executor": "Debug",
     "Gradle.ProxyTests.executor": "Run",
     "Gradle.ProxyTests.proxyTest.executor": "Run",
     "Gradle.ProxyTests.proxyTest2.executor": "Run",
@@ -134,13 +138,86 @@
       <recent name="" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.albireo3754.tobyspring.proxy" />
       <recent name="com.albireo3754.tobyspring.dao" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.albireo3754.tobyspring.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.ProxyTests">
+  <component name="RunManager" selected="Gradle.FactoryBeanTests">
+    <configuration name="FactoryBeanTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.albireo3754.tobyspring.proxy.FactoryBeanTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FactoryBeanTests.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.albireo3754.tobyspring.proxy.FactoryBeanTests.test&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="FactoryBean.test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.albireo3754.tobyspring.proxy.FactoryBean.test&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="ProxyTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -155,78 +232,6 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;com.albireo3754.tobyspring.proxy.ProxyTests&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ProxyTests.proxyTest2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.albireo3754.tobyspring.proxy.ProxyTests.proxyTest2&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ProxyTests.test_getUserByIdShouldBeProxying_getAllShouldNotBeProxying" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.albireo3754.tobyspring.proxy.ProxyTests.test_getUserByIdShouldBeProxying_getAllShouldNotBeProxying&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>true</RunAsTest>
-      <method v="2" />
-    </configuration>
-    <configuration name="ProxyTests.test_reflection" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.albireo3754.tobyspring.proxy.ProxyTests.test_reflection&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -283,11 +288,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.ProxyTests" />
+        <item itemvalue="Gradle.FactoryBeanTests" />
+        <item itemvalue="Gradle.FactoryBeanTests.test" />
+        <item itemvalue="Gradle.FactoryBean.test" />
         <item itemvalue="Gradle.ProxyTests.test_whenDynamicProxy_getUserByIdShouldBeProxying_getAllShouldNotBeProxying" />
-        <item itemvalue="Gradle.ProxyTests.test_getUserByIdShouldBeProxying_getAllShouldNotBeProxying" />
-        <item itemvalue="Gradle.ProxyTests.test_reflection" />
-        <item itemvalue="Gradle.ProxyTests.proxyTest2" />
+        <item itemvalue="Gradle.ProxyTests" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +314,7 @@
       <workItem from="1712995893831" duration="10222000" />
       <workItem from="1713015784003" duration="7094000" />
       <workItem from="1713193320155" duration="34000" />
-      <workItem from="1713964633630" duration="9504000" />
+      <workItem from="1713964633630" duration="11271000" />
     </task>
     <task id="LOCAL-00001" summary="5장 리부트">
       <option name="closed" value="true" />
