@@ -6,8 +6,9 @@ class TextViewController {
     var delegate: TextViewControllerDelegate? = null
 }
 
-class MainViewController: TextViewControllerDelegate {
-    private val mainViewModel = MainViewModel()
+class MainViewController(
+    private val mainViewModel: MainViewModel
+): TextViewControllerDelegate by mainViewModel {
     private val textViewController = TextViewController()
 
     fun viewDidInit() {
@@ -17,10 +18,19 @@ class MainViewController: TextViewControllerDelegate {
     override fun textViewDidChanged() {
         mainViewModel.textViewDidChanged()
     }
+
+    override fun textViewDidBeginEditing() {
+        mainViewModel.textViewDidBeginEditing()
+    }
 }
 
-class MainViewModel {
-    fun textViewDidChanged() {
+
+open class MainViewModel : TextViewControllerDelegate {
+    override fun textViewDidChanged() {
+        TODO("Not yet implemented")
+    }
+
+    override fun textViewDidBeginEditing() {
         TODO("Not yet implemented")
     }
 
@@ -28,13 +38,14 @@ class MainViewModel {
 
 interface TextViewControllerDelegate {
     fun textViewDidChanged()
+    fun textViewDidBeginEditing()
 }
 
 class ProxyTests {
 
     @Test
     fun proxyTest() {
-        val mainViewController = MainViewController()
+        val mainViewController = MainViewController(MainViewModel())
         mainViewController.viewDidInit()
     }
 }
