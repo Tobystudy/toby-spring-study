@@ -39,3 +39,12 @@
 	- @PropertySource를 @Configuration에 설정하고 @Environment를 주입해주면 사용할 수 있다.
 	- 프로퍼티의 값을 직접 주입받고 싶다면 @Value를 사용하자. 이것을 사용하려면 PropertySourcesPlaceholderConfigurer빈을 스태틱으로 하나 선언해야한다.
 - @Import는 모듈화된 빈 설정정보를 가져올때 사용하는 애노테이션인데, 이를 좀 더 의미있는 이름으로 선언하기 위해서 @Enable*\이름으로 설정 후 @Import를 메타 에노테이션으로 추가해보자. (사실상 애노테이션의 typealias 방법이라고 볼 수 있을 듯)
+
+
+### 추가
+- Spring Boot Redis Autoconfiguration
+	- https://brunch.co.kr/@anonymdevoo/49
+- Spring Boot Autoconfiguration 원리
+	- http://dveamer.github.io/backend/SpringBootAutoConfiguration.html
+	- https://wildeveloperetrain.tistory.com/292
+- @SpringBootApplication는 @EnableAutoConfiguration를 담고있다.
