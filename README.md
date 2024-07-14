@@ -5,14 +5,6 @@
 # 목표
 - 토비의 스프링 vol.1, vol.2(6월 말까지 컷)
 
-# 진행 상황
-- [2024.03.05] session 1. 킥오프
-- [2024.03.12] session 2. 오브젝트와 의존관계 - 발표자 : taechacode
-- [2024.03.19] session 3. 테스트 - 발표자 : tachacode
-- [2024.03.26] session 4. 템플릿 - 발표자 : albireo3754 [비고: taechacode 출장으로 불참]
-- [2024.04.02] session 5. 예외
-
-
 # 자료 컨벤션
 - 개별적으로 정리하신 내용을 각 챕터 디렉토리에 "[chapter.1]_[이름].md" 으로 세션 하루 전날 12시까지 업로드해주세요
 - 파일 포멧은 왠만하면 마크다운으로 작성해주세요
@@ -30,6 +22,6 @@
 
 - jinia91
 - tlswltjq
-- taechacode
+- taechacode(중도 하차)
 - albireo3754
 
